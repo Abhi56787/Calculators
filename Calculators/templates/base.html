@@ -4,10 +4,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="">
-  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-  <meta name="generator" content="Hugo 0.84.0">
-  <title>HomePage</title>
+  <meta name="description" content="Calculators">
+  <title>{%block title%} {%endblock title%}</title>
 
   <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/cover/">
 
@@ -42,13 +40,12 @@
   <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
     <header class="mb-auto">
       <div>
-        <h3 class="float-md-start mb-0">Calculators</h3>
-        <nav class="nav nav-masthead justify-content-center float-md-end">
-          <a class="nav-link active" aria-current="page" href="/">Home</a>
-          <a class="nav-link" href="mon_inv">Monthly Investment</a>
-          <a class="nav-link" href="vis_time">Vision Time</a>
-          <a class="nav-link" href="step_up_mon_inv">Step up Monthly investment</a>
-          <a class="nav-link" href="vis_time_up">Vision Time(Step-up)</a>
+        <h3 class="float-md-start mb-0" style="padding: 20px">Calculators</h3>
+        <nav class="nav nav-masthead justify-content-center float-md-end" >
+          {% block navbar %}
+
+          {% endblock navbar %}
+          
         </nav>
       </div>
     </header>

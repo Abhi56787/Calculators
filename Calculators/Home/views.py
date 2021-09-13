@@ -47,11 +47,11 @@ def vis_time(request):
 def step_up_mon_inv(request):
     if request.method == 'POST':
         return HttpResponse(request)    
-    return render(request, 'vis_time.html')
+    return render(request, 'step_up_mon_inv.html')
 
 
 def vis_time_up(request):
     if request.method == 'POST':
         return HttpResponse(request)    
-    return render(request, 'vis_time.html')
+    return render(request, 'vis_time_up.html')
 

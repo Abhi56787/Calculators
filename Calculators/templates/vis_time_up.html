@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 
-{% block title %}Step Up Monthly Investment Calculator{% endblock title %}
+{% block title %}Vision Time Step Up{% endblock title %}
 
 {% block navbar %}
 
 <a class="nav-link" href="/">Home</a>
 <a class="nav-link"  href="mon_inv">Monthly Investment</a>
 <a class="nav-link" href="vis_time">Vision Time</a>
-<a class="nav-link active" aria-current="page" href="step_up_mon_inv">Step up Monthly investment</a>
-<a class="nav-link" href="vis_time_up">Vision Time(Step-up)</a>
+<a class="nav-link" href="step_up_mon_inv">Step up Monthly investment</a>
+<a class="nav-link active" aria-current="page" href="vis_time_up">Vision Time(Step-up)</a>
 
 {% endblock navbar %}
 
@@ -16,14 +16,14 @@
 {% block body %}
 
 <main class="px-3">
-    <h1>Step Up Monthly Investment</h1>
+    <h1>Vision Time Step Up</h1>
     <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text,
         and add your own fullscreen background photo to make it your own.</p>
         
         <!-- Form -->
         <!-- Mon inv, years, expected return -->
     <div class="card bg-white text-black" style="width:18 ; padding: 20px;" >
-        <form method="post" action="/step_up_mon_inv" style="color: black;">
+        <form method="post" action="/vis_time_up" style="color: black;">
 	        {% csrf_token %}
 	            <div class="form-group mb-3">
 	                <label for="name">Monthly Investment</label>

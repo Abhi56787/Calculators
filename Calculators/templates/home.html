@@ -1,9 +1,22 @@
 {% extends 'base.html' %}
 
+{% block title %}HomePage{% endblock title %}
+
+{% block navbar %}
+
+<a class="nav-link active" aria-current="page" href="/">Home</a>
+<a class="nav-link" href="mon_inv">Monthly Investment</a>
+<a class="nav-link" href="vis_time">Vision Time</a>
+<a class="nav-link" href="step_up_mon_inv">Step up Monthly investment</a>
+<a class="nav-link" href="vis_time_up">Vision Time(Step-up)</a>
+
+{% endblock navbar %}
+
+
 {% block body %}
 
 <main class="px-3">
-    <h1>Cover your page.</h1>
+    <h1>Calculator's Project</h1>
     <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text,
         and add your own fullscreen background photo to make it your own.</p>
     <p class="lead">
