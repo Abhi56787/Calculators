@@ -13,7 +13,7 @@ def monthly_investment(request):
             mon_inv = float(request.POST.get('monthly_investment'))
             years = int(request.POST.get('years'))
             exp_ret = float(request.POST.get('exp_ret'))
-        except ValueError:
+        except Exception:
             return render(request, 'result.html', {'result':'Enter Valid values'})
         
         mon_inv *= 12
@@ -46,6 +46,29 @@ def vis_time(request):
 
 def step_up_mon_inv(request):
     if request.method == 'POST':
+        try:
+            mon_inv = float(request.POST.get('monthly_investment'))
+            mon_inc = float(request.POST.get('monthly_inc'))
+            years = int(request.POST.get('years'))
+            exp_ret = float(request.POST.get('exp_ret'))
+
+            mon_inv *= 12
+            amt_inv = mon_inv 
+            total_amt = mon_inv + (mon_inv * exp_ret) / 100
+            for _ in range(1,years):
+                mon_inv += mon_inc * 12
+                amt_inv += mon_inv 
+                total_val = total_amt + mon_inv
+                total_val += (total_val * exp_ret)/100
+                total_amt = total_val
+
+            profit = total_amt - amt_inv
+            total_ret = (total_amt - amt_inv) * 100 / amt_inv 
+            result = f'Total Earning after {years} years: ₹{total_amt:.2f}<br>Amount Invested : ₹{amt_inv:.2f}<br>Profit : ₹{profit:.2f}<br>Amount Return : {total_ret:.2f}%'
+            return render(request, 'result.html', {'result' : result})
+        except Exception:
+            return render(request, 'result.html', {'result':'Enter Valid values'})
+
         return HttpResponse(request)    
     return render(request, 'step_up_mon_inv.html')
 
