@@ -24,17 +24,18 @@
     <!-- Form -->
     <!-- Mon inv, years, expected return -->
     <div class="card bg-white" style="width:18 ; padding: 20px;" >
-        <form method="post" action="/contact" style="color: black;">
+        <form method="post" action="/vis_time" style="color: black;">
             {% csrf_token %}
+            
             <div class="form-group mb-3">
-                <label for="name">Monthly Investment</label>
+                <label for="name">Amount (in ₹)</label>
+                <input type="text" class="form-control" id="amount" name="amount" placeholder="1000">
+            </div>
+            
+            <div class="form-group mb-3">
+                <label for="name">Monthly Investment (in ₹)</label>
                 <input type="text" class="form-control" id="monthly_investment" name="monthly_investment"
                     placeholder="1000">
-            </div>
-
-            <div class="form-group mb-3">
-                <label for="name">Years</label>
-                <input type="text" class="form-control" id="years" name="years" placeholder="10">
             </div>
 
             <div class="form-group mb-3">

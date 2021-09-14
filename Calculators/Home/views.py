@@ -40,7 +40,28 @@ def monthly_investment(request):
 
 def vis_time(request):
     if request.method == 'POST':
-        return HttpResponse(request)    
+        try:
+            amt = float(request.POST.get('amount'))
+            mon_inv = float(request.POST.get('monthly_investment'))
+            exp_ret = float(request.POST.get('exp_ret'))
+        except Exception:
+            return render(request, 'result.html', context={'result' : 'Enter Valid Values'})
+
+        mon_inv *= 12
+        total_amt = mon_inv + (mon_inv * exp_ret) / 100
+        years = 1
+        while total_amt < amt:
+            years += 1 
+            temp = total_amt + mon_inv
+            temp += temp * exp_ret / 100
+            total_amt = temp
+        
+        amount_inv = mon_inv * years
+        profit = total_amt - amount_inv
+        total_ret = (total_amt - amount_inv) * 100 / amount_inv
+        result = f'Amount can be earned : ₹{total_amt:.2f} in {years} years <br>Amount Invested : ₹{amount_inv:.2f}<br>Profit : ₹{profit:.2f} <br>Total Return : {total_ret:.2f}%'
+        return render(request, 'result.html', context={'result' : result})
+
     return render(request, 'vis_time.html')
 
 
@@ -69,12 +90,36 @@ def step_up_mon_inv(request):
         except Exception:
             return render(request, 'result.html', {'result':'Enter Valid values'})
 
-        return HttpResponse(request)    
     return render(request, 'step_up_mon_inv.html')
 
 
 def vis_time_up(request):
     if request.method == 'POST':
-        return HttpResponse(request)    
+        try:
+            amt = float(request.POST.get('amount'))
+            mon_inv = float(request.POST.get('monthly_investment'))
+            mon_inc = float(request.POST.get('monthly_increment'))
+            exp_ret = float(request.POST.get('exp_ret'))
+        except Exception:
+            return render(request, 'result.html', context={'result' : 'Enter Valid Values'})
+
+        mon_inv *= 12
+        amt_inv = 0
+        amt_inv += mon_inv
+        total_amt = mon_inv + (mon_inv * exp_ret) / 100
+        years = 1
+        while total_amt < amt:
+            mon_inv += mon_inc * 12
+            amt_inv += mon_inv
+            years += 1 
+            temp = total_amt + mon_inv
+            temp += temp * exp_ret / 100
+            total_amt = temp
+        
+        profit = total_amt - amt_inv
+        total_ret = (total_amt - amt_inv) * 100 / amt_inv
+        result = f'Amount can be earned : ₹{total_amt:.2f} in {years} years <br>Amount Invested : ₹{amt_inv:.2f}<br>Profit : ₹{profit:.2f} <br>Total Return : {total_ret:.2f}%'
+        return render(request, 'result.html', {'result' : result})
+
     return render(request, 'vis_time_up.html')
 
