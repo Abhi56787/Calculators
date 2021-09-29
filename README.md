@@ -9,7 +9,7 @@
   
 - Change to repository Calculators directory
   ```
-  cd Calculators
+  cd Calculators/Calculators
   ```
   
 - Start Server using manage.py
