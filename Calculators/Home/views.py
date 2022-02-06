@@ -3,6 +3,24 @@ from django.http import request
 from django.shortcuts import render, HttpResponse
 
 # Create your views here.
+def __format_currency(curr:str | float | int) -> str:
+    if type(curr) != str:
+        curr = str(curr)
+
+    new = curr[-1:-4:-1][::-1]
+    curr = curr[-4::-1][::-1]
+
+    ele_list = []
+    curr = '0'+curr if len(curr)%2!=0 else curr
+    i = 0
+    while i < len(curr):
+        ele_list.append(curr[i:i+2])
+        i+=2
+    ele_list.append(new)
+    curr = ','.join(ele_list)
+    return curr.removeprefix('0')
+
+
 def index(request):
     return render(request, 'home.html')
 
@@ -28,7 +46,12 @@ def monthly_investment(request):
         total_return = (total_amt - amt_inv)*100/amt_inv
         profit = total_amt - amt_inv
 
-        result = f'Total Earning : ₹ {total_amt:.2f}<br>Amount Invested : ₹ {amt_inv:.2f}<br>Profit : ₹ {profit:.2f}<br>Total Return : {total_return:.2f} %'
+        total_amt = __format_currency(f'{int(total_amt)}')
+        amt_inv = __format_currency(f'{int(amt_inv)}')
+        profit = __format_currency(f'{int(profit)}')
+        total_return = __format_currency(f'{int(total_return)}')
+
+        result = f'Total Earning : ₹ {total_amt}<br>Amount Invested : ₹ {amt_inv}<br>Profit : ₹ {profit}<br>Total Return : {total_return} %'
         context = {
             'result' : result,
         }
@@ -59,7 +82,13 @@ def vis_time(request):
         amount_inv = mon_inv * years
         profit = total_amt - amount_inv
         total_ret = (total_amt - amount_inv) * 100 / amount_inv
-        result = f'Amount can be earned : ₹{total_amt:.2f} in {years} years <br>Amount Invested : ₹{amount_inv:.2f}<br>Profit : ₹{profit:.2f} <br>Total Return : {total_ret:.2f}%'
+
+        total_amt = __format_currency(int(total_amt))
+        amount_inv = __format_currency(int(amount_inv))
+        profit = __format_currency(int(profit))
+        total_ret = __format_currency(int(total_ret))
+
+        result = f'Amount can be earned : ₹{total_amt} in {years} years <br>Amount Invested : ₹{amount_inv}<br>Profit : ₹{profit} <br>Total Return : {total_ret}%'
         return render(request, 'result.html', context={'result' : result})
 
     return render(request, 'vis_time.html')
@@ -85,7 +114,13 @@ def step_up_mon_inv(request):
 
             profit = total_amt - amt_inv
             total_ret = (total_amt - amt_inv) * 100 / amt_inv 
-            result = f'Total Earning after {years} years: ₹{total_amt:.2f}<br>Amount Invested : ₹{amt_inv:.2f}<br>Profit : ₹{profit:.2f}<br>Amount Return : {total_ret:.2f}%'
+
+            total_amt = __format_currency(int(total_amt))
+            amt_inv = __format_currency(int(amt_inv))
+            profit = __format_currency(int(profit))
+            total_ret = __format_currency(int(total_ret))
+
+            result = f'Total Earning after {years} years: ₹{total_amt}<br>Amount Invested : ₹{amt_inv}<br>Profit : ₹{profit}<br>Amount Return : {total_ret}%'
             return render(request, 'result.html', {'result' : result})
         except Exception:
             return render(request, 'result.html', {'result':'Enter Valid values'})
@@ -118,7 +153,13 @@ def vis_time_up(request):
         
         profit = total_amt - amt_inv
         total_ret = (total_amt - amt_inv) * 100 / amt_inv
-        result = f'Amount can be earned : ₹{total_amt:.2f} in {years} years <br>Amount Invested : ₹{amt_inv:.2f}<br>Profit : ₹{profit:.2f} <br>Total Return : {total_ret:.2f}%'
+
+        total_amt = __format_currency(int(total_amt))
+        amt_inv = __format_currency(int(amt_inv))
+        profit = __format_currency(int(profit))
+        total_ret = __format_currency(int(total_ret))
+
+        result = f'Amount can be earned : ₹{total_amt} in {years} years <br>Amount Invested : ₹{amt_inv}<br>Profit : ₹{profit} <br>Total Return : {total_ret}%'
         return render(request, 'result.html', {'result' : result})
 
     return render(request, 'vis_time_up.html')
