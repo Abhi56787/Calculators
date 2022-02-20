@@ -12,8 +12,11 @@
   cd Calculators/Calculators
   ```
   
-- Start Server using manage.py
+- Start Server using manage.py after migrations
   ```
+  python manage.py makemigrations
+  python manage.py migrate
+  python manage.py collectstatic
   python manage.py runserver
   ```
   
