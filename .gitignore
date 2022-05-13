@@ -130,3 +130,6 @@ dmypy.json
 
 # custom data
 *temp*
+
+# ignore collected static files
+static_files
